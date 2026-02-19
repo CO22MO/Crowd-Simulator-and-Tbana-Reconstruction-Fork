@@ -9,6 +9,8 @@ public class Move : MonoBehaviour
     private MeshRenderer meshRenderer;
     Vector3 originalPos;
 
+    public AudioSource[] audioSource;          // 3D AudioSource
+
     void Start()
     {
         meshRenderer = GetComponent<MeshRenderer>();
@@ -28,9 +30,18 @@ public class Move : MonoBehaviour
 
             if (timer >= moveInterval)
             {
-                transform.position = originalPos;              
+                transform.position = originalPos;  
+                PlayTrainSound();
                 timer = 0f; 
             }
+        }
+    }
+
+    void PlayTrainSound()
+    {
+        foreach(AudioSource source in audioSource) 
+        {
+            source.Play();
         }
     }
 }

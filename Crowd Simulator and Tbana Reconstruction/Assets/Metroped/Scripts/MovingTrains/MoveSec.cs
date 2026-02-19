@@ -9,12 +9,13 @@ public class MoveSec : MonoBehaviour
     private MeshRenderer meshRenderer;
     Vector3 originalPos;
 
+    public AudioSource[] audioSource;          // 3D AudioSource
+
     void Start()
     {
         meshRenderer = GetComponent<MeshRenderer>();
         // originalPos = transform.position;
         originalPos = new Vector3(170f, transform.position.y, transform.position.z);
-
     }
 
     void Update()
@@ -29,9 +30,18 @@ public class MoveSec : MonoBehaviour
 
             if (timer >= moveInterval)
             {
-                transform.position = originalPos;              
+                transform.position = originalPos;
+                PlayTrainSound();
                 timer = 0f; 
             }
+        }
+    }
+
+    void PlayTrainSound()
+    {
+        foreach(AudioSource source in audioSource) 
+        {
+            source.Play();
         }
     }
 }
