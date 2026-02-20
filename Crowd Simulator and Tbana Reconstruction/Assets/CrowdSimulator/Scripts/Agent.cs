@@ -27,10 +27,18 @@ public class Agent : MonoBehaviour {
     public float maxWaitTime = 2f;
 	public float currentSpeed;
 
+	public AudioSource audioSource;
+	public AudioClip[] footstepClips;        // Footstep sounds
+	public float stepDistance = 2f;          // Distance traveled per step
+
+	private Vector3 lastPosition;
+    private float distanceTraveled = 0f;
+
 	
 	internal void Start() {
 		animator = transform.gameObject.GetComponent<Animator> ();
 		rbody = transform.gameObject.GetComponent<Rigidbody> ();
+
 
 		if (rbody != null)
 		{
@@ -73,6 +81,7 @@ public class Agent : MonoBehaviour {
 		pathIndex = 1;
 		preferredVelocity = (map.allNodes [path [pathIndex]].getTargetPoint (transform.position) - transform.position).normalized;
 		transform.localScale = new Vector3(1.0f, 1.0f, 1.0f); // Modify this to change the size of characters new Vector3(2.0f, 2.0f, 2.0f) is normal size
+		lastPosition = transform.position;
 	}
 
 	public void ApplyMaterials(Material materialColor, ref Dictionary<string, int> skins, Material argMat = null)
@@ -305,7 +314,33 @@ public class Agent : MonoBehaviour {
 		setWeights ();
 		Grid.instance.cellMatrix[row, column].addVelocity(this);
 		Grid.instance.cellMatrix[row, column].addDensity (this);
+
+
+		Vector3 delta = transform.position - lastPosition;
+        delta.y = 0; // ignore vertical movement
+        distanceTraveled += delta.magnitude;
+
+        if (distanceTraveled >= stepDistance)
+        {
+            PlayFootstep();
+            distanceTraveled = 0f;
+        }
+
+        lastPosition = transform.position;
+
 	}
+
+	/*
+	 *  Run the footstep sounds from clips
+	 */
+	void PlayFootstep()
+    {
+        if (footstepClips.Length == 0) return;
+
+        AudioClip clip = footstepClips[Random.Range(0, footstepClips.Length)];
+        audioSource.pitch = Random.Range(0.95f, 1.05f); // slight pitch variation
+        audioSource.PlayOneShot(clip);
+    }
 
 
 	/**
