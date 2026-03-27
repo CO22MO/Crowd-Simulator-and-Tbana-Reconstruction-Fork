@@ -22,12 +22,14 @@ public class ImpostorController : MonoBehaviour
         float angle = Mathf.Atan2(dir.x, dir.z) * Mathf.Rad2Deg;
 
         if (angle < 0)
+        {
             angle += 360;
-
-        int frame = 0;
+        }
+                    
+        int frame = Mathf.FloorToInt(angle / (360f / frames));
 
         int column = frame % columns;
-        int row = frame / columns;
+        int row = (1 - (frame / columns)) % rows;
 
         Vector2 scale = new Vector2(1f / columns, 1f / rows);
 
@@ -39,6 +41,7 @@ public class ImpostorController : MonoBehaviour
         rend.material.mainTextureScale = scale;
         rend.material.mainTextureOffset = offset;
 
-        transform.Rotate(0,180,0);
+        transform.LookAt(cam);
+        transform.Rotate(0, 180, 0);
     }
 }
