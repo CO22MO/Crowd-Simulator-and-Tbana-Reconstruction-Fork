@@ -19,6 +19,8 @@ namespace Leguar.DotMatrix.Example
 		public DotMatrix dotMatrix; // Reference is set in Unity Editor inspector
 		private Controller controller;
 		private TextCommand nextStopMessage;
+		public AudioSource audioSource;          // 3D AudioSource
+		public AudioClip[] departureSoundClips;        // Departure sounds
 
 
 		void Start()
@@ -113,7 +115,9 @@ namespace Leguar.DotMatrix.Example
 			// Replace old next stop text in queue with new one
 			controller.ReplaceCommand(nextStopMessage, newNextStopMessage);
 			nextStopMessage = newNextStopMessage;
-
+			// After new nextStopMessage play audio of that stop
+			AudioClip clip = departureSoundClips[Global.counter % 3];
+			audioSource.PlayOneShot(clip);
 		}
 
 		private string getRandomNextStop()

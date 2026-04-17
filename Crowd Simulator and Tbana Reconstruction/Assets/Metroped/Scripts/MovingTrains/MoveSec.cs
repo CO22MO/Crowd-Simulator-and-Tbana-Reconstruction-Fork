@@ -9,8 +9,8 @@ public class MoveSec : MonoBehaviour
     private MeshRenderer meshRenderer;
     Vector3 originalPos;
 
-    public AudioSource[] audioSource;          // 3D AudioSource
-
+    public AudioSource[] audioSource;
+    
     void Start()
     {
         meshRenderer = GetComponent<MeshRenderer>();
