@@ -20,17 +20,19 @@ namespace Leguar.DotMatrix.Example
 		private Controller controller;
 		private TextCommand nextStopMessage;
 		public AudioSource audioSource;          // 3D AudioSource
-		public AudioClip[] departureSoundClips;        // Departure sounds
+		public AudioClip[] departureSounds = new AudioClip[3];        // Departure sounds
+		private int index = 0;
 
 
 		void Start()
 		{
-
 			// Get controller
 
 			controller = dotMatrix.GetController();
 
 			controller.DefaultSpeedDotsPerSecond = 45f;
+
+			InvokeRepeating(nameof(PlayAudio), 30f, 30f);
 
 			// Set basic loop that is repeated forever
 			PauseCommand pause = new PauseCommand(30f)
@@ -54,8 +56,8 @@ namespace Leguar.DotMatrix.Example
 			{
 			Global.counter++;
 			controller.AddCommand(nextStopMessage);
-			controller.AddCommand(pause);
 			setRandomNextStop();
+			controller.AddCommand(pause);
 			}
 
 			//InvokeRepeating("setRandomNextStop", 0f, 5f);
@@ -115,19 +117,21 @@ namespace Leguar.DotMatrix.Example
 			// Replace old next stop text in queue with new one
 			controller.ReplaceCommand(nextStopMessage, newNextStopMessage);
 			nextStopMessage = newNextStopMessage;
-			// After new nextStopMessage play audio of that stop
-			AudioClip clip = departureSoundClips[Global.counter % 3];
-			audioSource.PlayOneShot(clip);
 		}
 
 		private string getRandomNextStop()
 		{
 			string[] stops = new string[] { "Farsta Strand        Nu", "Hagsätra           Nu", "Skarpnäck          Nu", };
 			//int rnd = Random.Range(0, stops.Length);
-			int index = Global.counter % 3;
-
+			index = Global.counter % stops.Length;
+			Debug.Log("Current index: " + index);
 			return stops[index];
 		}
 
+		void PlayAudio()
+		{
+			Debug.Log("Audio index: " + index);
+			audioSource.PlayOneShot(departureSounds[index]);
+		}
 	}
 }
