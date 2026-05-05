@@ -19,19 +19,24 @@ namespace Leguar.DotMatrix.Example
 		public DotMatrix dotMatrix; // Reference is set in Unity Editor inspector
 		private Controller controller;
 		private TextCommand nextStopMessage;
+		public AudioSource audioSource;          // 3D AudioSource
+		public AudioClip[] departureSounds = new AudioClip[3];        // Departure sounds
+
+		private int audioIndex = 1;
 
 
 		void Start()
 		{
-
 			// Get controller
 
 			controller = dotMatrix.GetController();
 
 			controller.DefaultSpeedDotsPerSecond = 45f;
 
+			InvokeRepeating(nameof(PlayAudio), 67f, 67f);
+
 			// Set basic loop that is repeated forever
-			PauseCommand pause = new PauseCommand(30f)
+			PauseCommand pause = new PauseCommand(67f)
 			{
 				Repeat = true
 			};
@@ -44,7 +49,7 @@ namespace Leguar.DotMatrix.Example
 			nextStopMessage = new TextCommand("(placeholder)");
 			controller.AddCommand(nextStopMessage);
 			//controller.AddCommand(text);
-			controller.AddCommand(pause);
+			//controller.AddCommand(pause);
 			//controller.AddCommand(clear);
 			setRandomNextStop();
 
@@ -52,8 +57,8 @@ namespace Leguar.DotMatrix.Example
 			{
 			Global.counter++;
 			controller.AddCommand(nextStopMessage);
-			controller.AddCommand(pause);
 			setRandomNextStop();
+			controller.AddCommand(pause);
 			}
 
 			//InvokeRepeating("setRandomNextStop", 0f, 5f);
@@ -113,17 +118,21 @@ namespace Leguar.DotMatrix.Example
 			// Replace old next stop text in queue with new one
 			controller.ReplaceCommand(nextStopMessage, newNextStopMessage);
 			nextStopMessage = newNextStopMessage;
-
 		}
 
 		private string getRandomNextStop()
 		{
 			string[] stops = new string[] { "Farsta Strand        Nu", "Hagsätra           Nu", "Skarpnäck          Nu", };
 			//int rnd = Random.Range(0, stops.Length);
-			int index = Global.counter % 3;
-
+			int index = Global.counter % stops.Length;
 			return stops[index];
 		}
 
+		void PlayAudio()
+		{
+			Debug.Log("Audio index: " + (audioIndex % 3));
+			audioSource.PlayOneShot(departureSounds[audioIndex % 3]);
+			audioIndex++;
+		}
 	}
 }
