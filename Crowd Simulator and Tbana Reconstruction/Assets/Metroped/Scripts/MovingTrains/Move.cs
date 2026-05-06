@@ -49,20 +49,20 @@ public class Move : MonoBehaviour
             case TrainState.MovingToPlatform:
                 float distToCenter = stopX - transform.position.x;
                 
-                // Bromsa in när vi är nära (15 enheter kvar)
+                // Bromsa in nï¿½r vi ï¿½r nï¿½ra (15 enheter kvar)
                 float targetSpeed = (distToCenter < 15f) ? 0f : maxSpeed;
                 
-                // Mjuk förändring av farten
+                // Mjuk fï¿½rï¿½ndring av farten
                 currentSpeed = Mathf.MoveTowards(currentSpeed, targetSpeed, acceleration * Time.deltaTime);
                 transform.Translate(Vector3.right * currentSpeed * Time.deltaTime);
 
-                // NY LOGIK: Om farten är nästan noll, stanna precis där du är
+                // NY LOGIK: Om farten ï¿½r nï¿½stan noll, stanna precis dï¿½r du ï¿½r
                 if (currentSpeed < 0.05f && distToCenter < 1.0f) 
                 {
                     currentSpeed = 0f; // Nolla farten helt
                     timer = 0f;
                     currentState = TrainState.WaitingAtPlatform;
-                    // Vi tvingar INTE positionen här, tåget stannar "där det landar"
+                    // Vi tvingar INTE positionen hï¿½r, tï¿½get stannar "dï¿½r det landar"
                 }
                 break;
 
@@ -102,7 +102,7 @@ public class Move : MonoBehaviour
         transform.position = startPos;
         currentSpeed = 0f;
         timer = 0f;
-        startWaitTime = Random.Range(5f, 20f); // Ny slumpmässig tid
+        startWaitTime = Random.Range(5f, 20f); // Ny slumpmï¿½ssig tid
         currentState = TrainState.WaitingAtStart;
     }
 
