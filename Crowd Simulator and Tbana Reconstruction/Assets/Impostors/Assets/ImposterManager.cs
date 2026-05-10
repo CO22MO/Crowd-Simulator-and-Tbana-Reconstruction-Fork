@@ -19,7 +19,7 @@ public class ImpostorManager : MonoBehaviour {
 
 	[Header("Settings")]
 	public int resolution = 1024;
-	public int frames = 16;
+	public int frames = 144;
 	private int columns, rows;
 
 	[Header("References")]
