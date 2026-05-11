@@ -32,41 +32,47 @@ public class ImpostorManager : MonoBehaviour {
 	[ContextMenu("Bake and Setup Impostor")]
     void Start() {
 		GameObject cameraObject = Instantiate(this.captureCameraPrefab);
-
-        this.LODGroup = Instantiate(this.LODGroupPrefab);
-        transform.SetParent(this.LODGroup.transform);
-
-		this.impostorMaterial = Instantiate(this.impostorMaterialPrefab);
-
-		this.captureCamera = cameraObject.GetComponent<Camera>();
+        this.captureCamera = cameraObject.GetComponent<Camera>();
 		this.cameraTransform = cameraObject.GetComponent<Transform>();
-
 		if (cameraObject == null || this.captureCamera == null || this.cameraTransform == null) {
 			Debug.Log("ImpostorManager is not setup correctly!?");
 		}
-        Renderer renderer = GetComponentInChildren<Renderer>();
-		this.BakeModel(renderer);
+
+        this.LODGroup = Instantiate(this.LODGroupPrefab);
+        if(LODGroup == null){
+            Debug.Log("LODGroup didn't instantiate");
+        }
+        transform.SetParent(this.LODGroup.transform);
+
+		this.impostorMaterial = Instantiate(this.impostorMaterialPrefab);
+        if(LODGroup == null){
+            Debug.Log("impostorMaterial didn't instantiate");
+        }
+
+        renderer = GetComponentInChildren<Renderer>();
+        if (renderer == null){
+            Debug.Log("renderer cannot be found");
+        }
+
+		this.BakeModel();
 		DestroyImmediate(cameraObject);
 
 		this.impostorQuad = Instantiate(this.impostorQuadPrefab, this.LODGroup.transform);
+        if(impostorQuad == null){
+            Debug.Log("impostorQuad didn't instantiate");
+        }
+        this.MatchQuadHeight();
 
-        //Adjusts quad height to source objects height        
-        this.MatchQuadHeight(renderer, ref impostorQuad);
-
-		// this.impostorQuad = Instantiate(this.impostorQuadPrefab);
 		this.renderer = this.impostorQuad.GetComponent<Renderer>();
 		this.renderer.material = this.impostorMaterial;
-
 		this.targetTransform = this.impostorQuad.GetComponent<Transform>();
-
-
 		this.cameraTransform = Camera.main.GetComponent<Transform>();
+
 		this.columns = this.rows = Mathf.FloorToInt(Mathf.Sqrt(frames));
 
         UnityEngine.LOD[] lods = this.LODGroup.GetComponent<LODGroup>().GetLODs();
         lods[0].renderers = GetComponentsInChildren<Renderer>();
         lods[1].renderers = new Renderer[] { this.renderer };
-
         this.LODGroup.GetComponent<LODGroup>().SetLODs(lods);
 	}
 
@@ -104,7 +110,7 @@ public class ImpostorManager : MonoBehaviour {
 	}
 
 
-    public void BakeModel(Renderer renderer) {
+    public void BakeModel() {
         if (renderer == null){
             Debug.Log("renderer is null");
         }
@@ -181,38 +187,21 @@ public class ImpostorManager : MonoBehaviour {
 		return atlas;
     }
 
-    private Vector3 GetTargetCenter(GameObject obj) {
-        Renderer[] renderers = obj.GetComponentsInChildren<Renderer>();
-        if (renderers.Length == 0) {
-            return obj.transform.position;
-        }
-
-        Bounds bounds = renderers[0].bounds;
-        foreach (var r in renderers) {
-            bounds.Encapsulate(r.bounds);
-        }
-
-        return bounds.center;
-    }
-
-
-    private void MatchQuadHeight(Renderer sourceRenderer, ref GameObject impostorQuad){
+    // Adjusts size of quad to the height of the object.
+    // Also centers the center of the quad to the center of the object.
+    private void MatchQuadHeight(){
         Renderer impostorQuadRenderer = impostorQuad.GetComponentInChildren<Renderer>();
-        if(sourceRenderer == null){
-            Debug.Log("renderer is null");
-        }
         if(impostorQuad == null){
             Debug.Log("impostorQuad is null");
         }
 
-        Bounds sourceBounds = sourceRenderer.bounds;
-        Vector3 sourceObjectCenter = sourceRenderer.bounds.center;
+        Bounds sourceBounds = renderer.bounds;
+        Vector3 sourceObjectCenter = renderer.bounds.center;
         Vector3 impostorQuadCenter = impostorQuadRenderer.bounds.center;
-        Vector3 diff = sourceObjectCenter - impostorQuadCenter;
+        float rescale = sourceBounds.size.y * distance;
 
-        float newHeight = sourceBounds.size.y * distance;
-
-        impostorQuad.transform.localScale = new Vector3(newHeight,newHeight, 1f);
-        impostorQuad.transform.position += diff;
+        //Since the quad is a square, if the y scale is adjusted, the x scale must be as well in order to retain the x to y ratio.
+        impostorQuad.transform.localScale = new Vector3(rescale,rescale, 1f);
+        impostorQuad.transform.position += sourceObjectCenter - impostorQuadCenter;
     }
 }
