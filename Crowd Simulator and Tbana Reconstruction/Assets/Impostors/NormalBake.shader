@@ -35,6 +35,7 @@ Shader "Custom/NormalBake"
             fixed4 frag (v2f i) : SV_Target
             {
                 float3 n = normalize(i.normal);
+                // Force values to be beween 0.5 and 1.0
                 return float4(n * 0.5 + 0.5, 1.0);
             }
 
