@@ -23,7 +23,6 @@ public class MoveSec : MonoBehaviour
     public AudioClip[] trainClips;
 
     private bool timerGuard = false;
-    private int alternatingGuard = 0;
 
     void Start()
     {
@@ -41,6 +40,7 @@ public class MoveSec : MonoBehaviour
                 if (timer >= startWaitTime)
                 {
                     timer = 0f;
+                    changeVolume(0.5f);
                     PlayTrainSound(trainClips[0]);
                     currentState = TrainState.MovingToPlatform;
                 }
@@ -64,15 +64,16 @@ public class MoveSec : MonoBehaviour
 
             case TrainState.WaitingAtPlatform:
                 timer += Time.deltaTime;
-                if (timer >= 3 && timerGuard == false && alternatingGuard % 2 == 0)
+                if (timer >= 2 && timerGuard == false)
                 {
+                    changeVolume(1f);
                     PlayTrainSound(trainClips[1]);
                     timerGuard = true;
                 }
                 if (timer >= platformWaitTime)
                 {
                     timer = 0f;
-                    alternatingGuard++;
+                    changeVolume(0.5f);
                     // Play train sound for train departing
                     PlayTrainSound(trainClips[2]);
                     timerGuard = false;
@@ -115,6 +116,14 @@ public class MoveSec : MonoBehaviour
         foreach(AudioSource source in audioSource) 
         {
             source.Stop();
+        }
+    }
+
+    void changeVolume(float vol)
+    {
+        foreach(AudioSource source in audioSource) 
+        {
+            source.volume = vol;
         }
     }
 }
