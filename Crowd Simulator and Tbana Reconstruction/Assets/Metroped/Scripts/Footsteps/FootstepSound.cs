@@ -11,17 +11,20 @@ public class PlayerFootsteps : MonoBehaviour
     private Vector3 lastPosition;
     private float distanceTraveled = 0f;
 
+    // Sets current position for the player to last position
     void Start()
     {
         lastPosition = transform.position;
     }
 
+    // Updates the last position after each tick
     void Update()
     {
         Vector3 delta = transform.position - lastPosition;
         delta.y = 0; // ignore vertical movement
         distanceTraveled += delta.magnitude;
 
+        // If distance traveled (difference between last position and current position) then play a stepping sound
         if (distanceTraveled >= stepDistance)
         {
             PlayFootstep();
@@ -31,6 +34,7 @@ public class PlayerFootsteps : MonoBehaviour
         lastPosition = transform.position;
     }
 
+    // From the AudioClip array play a random footstep sound
     void PlayFootstep()
     {
         if (footstepClips.Length == 0) return;

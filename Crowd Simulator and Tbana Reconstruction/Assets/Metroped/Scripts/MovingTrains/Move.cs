@@ -19,11 +19,12 @@ public class Move : MonoBehaviour
     private float maxSpeed = 10f;
     private float acceleration = 3f;
 
-    public AudioSource[] audioSource;
-    public AudioClip[] trainClips;
+    public AudioSource[] audioSource;   // Array of AudioSourcees sincce eeach train has multiple sounces which sound comes from
+    public AudioClip[] trainClips;      // An array of soundclips, trainClip[0] is arrival sound, trainClip[1] is safety announcement and trainClip[2] is departure
 
     private bool timerGuard = false;
 
+    // Set train to starting position
     void Start()
     {
         startPos = new Vector3(-115f, transform.position.y, transform.position.z);
@@ -31,12 +32,15 @@ public class Move : MonoBehaviour
         ResetToStart();
     }
 
+    // Updates train position and state
     void Update()
     {
         switch (currentState)
         {
+            // Train is waiting out a timer at starting position
             case TrainState.WaitingAtStart:
                 timer += Time.deltaTime;
+                // Train starts moving towards the metro, arrival sound is played
                 if (timer >= startWaitTime)
                 {
                     timer = 0f;
@@ -45,7 +49,7 @@ public class Move : MonoBehaviour
                     currentState = TrainState.MovingToPlatform;
                 }
                 break;
-
+            
             case TrainState.MovingToPlatform:
                 float distToCenter = stopX - transform.position.x;
                 
@@ -66,19 +70,21 @@ public class Move : MonoBehaviour
                 }
                 break;
 
+            // Train is waiting out timer at the platform
             case TrainState.WaitingAtPlatform:
                 timer += Time.deltaTime;
+                // Wait 2 seconds then play the safety announcement
                 if (timer >= 2 && timerGuard == false)
                 {
                     changeVolume(1f);
                     PlayTrainSound(trainClips[1]);
                     timerGuard = true;
                 }
+                // Play train sound for train departing after timer is done
                 if (timer >= platformWaitTime)
                 {
                     timer = 0f;
                     changeVolume(0.5f);
-                    // Play train sound for train departing
                     PlayTrainSound(trainClips[2]);
                     timerGuard = false;
                     currentState = TrainState.MovingToEnd;
@@ -97,7 +103,7 @@ public class Move : MonoBehaviour
                 break;
         }
     }
-
+    // Move train back to original position
     void ResetToStart()
     {
         transform.position = startPos;
@@ -107,6 +113,7 @@ public class Move : MonoBehaviour
         currentState = TrainState.WaitingAtStart;
     }
 
+    // Play an AudioClip on all audioSources
     void PlayTrainSound(AudioClip clip)
     {
         foreach(AudioSource source in audioSource) 
@@ -115,6 +122,7 @@ public class Move : MonoBehaviour
         }
     }
 
+    // Kills the sound from the train
     void StopTrainSound()
     {
         foreach(AudioSource source in audioSource) 
@@ -123,6 +131,7 @@ public class Move : MonoBehaviour
         }
     }
 
+    // Updates the volume of all audioSources
     void changeVolume(float vol)
     {
         foreach(AudioSource source in audioSource) 

@@ -319,7 +319,7 @@ public class Agent : MonoBehaviour {
 		Vector3 delta = transform.position - lastPosition;
         delta.y = 0; // ignore vertical movement
         distanceTraveled += delta.magnitude;
-
+		// If distance traveled (difference between last position and current position) then play a stepping sound
         if (distanceTraveled >= stepDistance)
         {
             PlayFootstep();
@@ -331,7 +331,7 @@ public class Agent : MonoBehaviour {
 	}
 
 	/*
-	 *  Run the footstep sounds from clips
+	 *  Plays a random footstep sound from clips
 	 */
 	void PlayFootstep()
     {

@@ -128,9 +128,9 @@ namespace Leguar.DotMatrix.Example
 			return stops[index];
 		}
 
+		// Plays thee audio comming from the digital sign based on the "stops"
 		void PlayAudio()
 		{
-			Debug.Log("Audio index: " + (audioIndex % 3));
 			audioSource.PlayOneShot(departureSounds[audioIndex % 3]);
 			audioIndex++;
 		}
