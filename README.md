@@ -1,3 +1,6 @@
+
+
+<img width="330" height="240" alt="98ca5005-a9ac-4800-893e-43ac39605d84" src="https://github.com/user-attachments/assets/0be44b22-b116-4b04-99e4-81312353114e" />
 # Welcome to the crowd simulator! 👩‍💻
 ![image]("https://media.discordapp.net/attachments/1292895816566181970/1513888786214289530/98ca5005-a9ac-4800-893e-43ac39605d84.gif?ex=6a295e4d&is=6a280ccd&hm=cb6259ff9aa2f13271bc465f5471ed1f207d73669162519f70ffb9d54f56e0c0&=")
 
