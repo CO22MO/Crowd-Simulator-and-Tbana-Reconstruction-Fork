@@ -69,5 +69,5 @@ For MacOS: Might have to add `softwareupdate --install-rosetta` in the terminal 
 
 <img width="800" height="450" alt="60ebda67-6e7c-4950-8796-31240c80f283" src="https://github.com/user-attachments/assets/b677a689-cb4d-4eab-84a6-3abdd4a92828" />
 
-<img width="452" height="238" alt="image" src="https://github.com/user-attachments/assets/a3692b67-ed16-41cb-9361-69bdbdeca392" />
+<img width="800" height="auto" alt="image" src="https://github.com/user-attachments/assets/a3692b67-ed16-41cb-9361-69bdbdeca392" />
 
