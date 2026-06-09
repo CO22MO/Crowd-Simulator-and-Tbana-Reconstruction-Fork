@@ -16,6 +16,7 @@
 - The sound assets exists in the folder `/Assets/Soundscape`
 - Under `/Assets/Metroped/Scripts` code files for the Digital signs, the functionality of the metro trains, the sound and movements of the player as well as tools for demo and UI scripts can be found
 - Under [`Crowd-Simulator-and-Tbana-Reconstruction-Fork/Documents/`](https://github.com/CO22MO/Crowd-Simulator-and-Tbana-Reconstruction-Fork/tree/main/Documents) the project report for PVK Software Engineering group 2026 can be found as `Metroped Project.pdf`, detailing their work.
+- Demo video of the project can be seen at [`https://www.youtube.com/watch?v=pjyfL-QzsRc`](https://www.youtube.com/watch?v=pjyfL-QzsRc).
 
 ## How to download and use
 1. Download Unity 2022.3.18f1
@@ -23,6 +24,8 @@
 3. Open the MetroPed "Crowd Simulation and Tbana Reconstruction" folder using the Unity launcher
 4. Once the project is loaded in click the "Play" button and choose the desired settings (VR/Regular, with or without scenarios)
 5. With this the simulation should be runnable and operational
+
+For MacOS: Might have to add `softwareupdate --install-rosetta` in the terminal to allow Unity to open package manager in order to open the project
 
 ## Unity Hiearchy
 - StationExtended: contains all the 3D models for the metro station including the subway trains and their functionality.
