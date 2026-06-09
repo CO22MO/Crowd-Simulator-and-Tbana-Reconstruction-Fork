@@ -1,5 +1,5 @@
 # Welcome to the crowd simulator! 👩‍💻
-![image]("https://github.com/user-attachments/assets/e0cd43e8-44e3-449a-8142-bb1b5b03dfd9")
+![image]("https://media.discordapp.net/attachments/1292895816566181970/1513888786214289530/98ca5005-a9ac-4800-893e-43ac39605d84.gif?ex=6a295e4d&is=6a280ccd&hm=cb6259ff9aa2f13271bc465f5471ed1f207d73669162519f70ffb9d54f56e0c0&=")
 
 👩‍💻 Please fork this repo if you plan to create a project based on this version.
 
