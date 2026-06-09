@@ -14,6 +14,7 @@
 - The subway reconstruction assets and scene can be found in `/Assets/Metroped`
 - The sound assets exists in the folder `/Assets/Soundscape`
 - Under `/Assets/Metroped/Scripts` code files for the Digital signs, the functionality of the metro trains, the sound and movements of the player as well as tools for demo and UI scripts can be found
+- Under [`Crowd-Simulator-and-Tbana-Reconstruction-Fork/Documents/`](https://github.com/CO22MO/Crowd-Simulator-and-Tbana-Reconstruction-Fork/tree/main/Documents) the project report for PVK Software Engineering group 2026 can be found as `Metroped Project.pdf`, detailing their work.
 
 ## How to download and use
 1. Download Unity 2022.3.18f1
@@ -47,16 +48,18 @@
 - [Metroped Interactive](https://github.com/JulianLey/MetropedInteractive)
 
 ### Jenna Smulter
-- Improvements and bug fixes to crowd simulator. Owner of this repo.
+- Improvements and bug fixes to crowd simulator.
+- [Metroped Tbana-Reconstruction](https://github.com/KTH-High-Density-Crowd-Simulator/Crowd-Simulator-and-Tbana-Reconstruction)
 
 ### Anton Porsbjer
-- Improvements and bug fixes to crowd simulator. Owner of this repo.
+- Improvements and bug fixes to crowd simulator.
+- [Metroped Tbana-Reconstruction](https://github.com/KTH-High-Density-Crowd-Simulator/Crowd-Simulator-and-Tbana-Reconstruction)
 
 ### PVK Software Engineering group 2026
-
-#### Erik Hortlund
-
-### Oscar Ahde
+- Added soundscape
+- Initial implementation of imposter rendering technique
+- Improvements to the subway reconstruction
+- Owners of this repo 
 
 ## Screenshots
 
