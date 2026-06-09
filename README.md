@@ -1,5 +1,5 @@
 # Welcome to the crowd simulator! 👩‍💻
-<img width="100%" height="auto" alt="98ca5005-a9ac-4800-893e-43ac39605d84" src="https://github.com/user-attachments/assets/0be44b22-b116-4b04-99e4-81312353114e" />
+<img width="70%" height="auto" alt="98ca5005-a9ac-4800-893e-43ac39605d84" src="https://github.com/user-attachments/assets/0be44b22-b116-4b04-99e4-81312353114e" />
 
 
 👩‍💻 Please fork this repo if you plan to create a project based on this version.
