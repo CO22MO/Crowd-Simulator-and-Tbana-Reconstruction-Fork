@@ -52,11 +52,15 @@
 ### Anton Porsbjer
 - Improvements and bug fixes to crowd simulator. Owner of this repo.
 
+### PVK Software Engineering group 2026
+
+#### Erik Hortlund
+
+### Oscar Ahde
+
 ## Screenshots
 
 ![platform](https://github.com/user-attachments/assets/9f0915a1-38f2-43c5-8779-f3f2bc1480b0)
 
 ![mycketfolk](https://github.com/user-attachments/assets/513d1935-565c-4e22-adf2-e14af7e557df)
-
-
 
