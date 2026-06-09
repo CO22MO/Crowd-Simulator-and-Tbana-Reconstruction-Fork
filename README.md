@@ -71,4 +71,4 @@ For MacOS: Might have to add `softwareupdate --install-rosetta` in the terminal 
 
 <img width="800" height="auto" alt="image" src="https://github.com/user-attachments/assets/a3692b67-ed16-41cb-9361-69bdbdeca392" />
 
-<img width="988" height="740" alt="00586c10-8e71-4bed-851c-45da68203048" src="https://github.com/user-attachments/assets/f503203c-eadc-4522-a173-3996edc22f96" />
+<img width="800" height="auto" alt="00586c10-8e71-4bed-851c-45da68203048" src="https://github.com/user-attachments/assets/f503203c-eadc-4522-a173-3996edc22f96" />
